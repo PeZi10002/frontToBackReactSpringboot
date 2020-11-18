@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://localhost:3000") // react API anbinden
+//@CrossOrigin(origins = "http://localhost:3000") // react API anbinden
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("mitarbeiter") // Genereller Pfad: localhost:8080/mitarbeiter
+@RequestMapping("api/") // Genereller Pfad: localhost:8080/mitarbeiter
 public class MitarbeiterRestController {
     @Autowired
     private MitarbeiterService service;
@@ -54,9 +55,14 @@ public class MitarbeiterRestController {
      * ResponseEntity.ok().body(service.getAllMitarbeiter()); }
      */
 
-    @GetMapping
-    public String index() {
-        return "index";
+    /**
+     * React View
+     * 
+     * @return
+     */
+    @GetMapping("mitarbeiter")
+    public List<Mitarbeiter> getMitarbeiter() {
+        return this.service.getAllMitarbeiter();
     }
 
     /**
