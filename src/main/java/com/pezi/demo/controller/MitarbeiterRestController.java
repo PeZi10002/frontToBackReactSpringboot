@@ -48,9 +48,15 @@ public class MitarbeiterRestController {
      * Get All Mitarbeiter - Tested with get-request auf localhost:8080/mitarbeiter
      * funktioniert
      */
+    /*
+     * @GetMapping public ResponseEntity<List<Mitarbeiter>>
+     * getAllMitarbeiterRequestMethode() { return
+     * ResponseEntity.ok().body(service.getAllMitarbeiter()); }
+     */
+
     @GetMapping
-    public ResponseEntity<List<Mitarbeiter>> getAllMitarbeiterRequestMethode() {
-        return ResponseEntity.ok().body(service.getAllMitarbeiter());
+    public String index() {
+        return "index";
     }
 
     /**
