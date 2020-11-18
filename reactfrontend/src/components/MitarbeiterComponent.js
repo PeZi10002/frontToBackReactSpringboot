@@ -6,21 +6,17 @@ class MitarbeiterComponent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            m: []
+            m: [Object]
         }
     }
 
     //lifecyclemethod, will get called immetiately after component got mounted
-    componentDidMount() {
-        MitarbeiterService.getMitarbeiter().then((response) => {
-            const data = response.data;
-            //console.log(data)
-            //var sortItOut = Object.keys(data).map(key => { return data[key] });
-            var newArrayDataOfOjbect = Object.entries(data)
+    async componentDidMount() {
 
-            console.log(newArrayDataOfOjbect)//funkt .entries macht ein array von arrays draus
-            this.setState({ m: newArrayDataOfOjbect })
-            console.log(this.state)//basst
+        await MitarbeiterService.getMitarbeiter().then((response) => {
+            this.setState({m: response.data})
+            console.log(this.state)//passt
+            
         });
     }
 
@@ -28,10 +24,10 @@ class MitarbeiterComponent extends React.Component {
 
 
 
-    render() {
-        //console.log(this.mitarbeiter)
-        return (
 
+    render() {
+        
+        return (
 
             < div >
                 <h1 className="text-center"> Mitarbeiter Liste</h1>
@@ -46,14 +42,15 @@ class MitarbeiterComponent extends React.Component {
                     </thead>
 
                     <tbody>
+                        {console.log(this.state)}
 
                         {this.state.m.map(
-                            (mitarbeiter) => {
+                            (mitarbeiter, index) => {
                                 return (
                                     <tr>
-                                        <td key={mitarbeiter.Id}> {mitarbeiter.id}</td>
-                                        <td key={mitarbeiter.vorName}> {mitarbeiter.vorName}</td>
-                                        <td key={mitarbeiter.Nachname}> {mitarbeiter.nachName}</td>
+                                        <td > {mitarbeiter.id}</td>
+                                        <td > {mitarbeiter.vorName}</td>
+                                        <td > {mitarbeiter.nachName}</td>
                                     </tr>)
                             }
                         )
